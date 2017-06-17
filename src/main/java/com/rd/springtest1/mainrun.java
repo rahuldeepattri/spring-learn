@@ -5,7 +5,6 @@
  */
 package com.rd.springtest1;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
@@ -13,9 +12,16 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  * @author rahul
  */
 public class mainrun {
+
     public static void main(String[] args) {
-        ApplicationContext context=new FileSystemXmlApplicationContext("beans.xml");
-        Library ob=context.getBean(Library.class);
-        System.out.println(ob);
+        FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
+
+        for (String arg : context.getBeanDefinitionNames()) {
+            Library ob = (Library) context.getBean(arg);
+            System.out.println(ob);
+
+        }
+        System.out.println("asdsad"+context.getApplicationName());
+        context.close();
     }
 }
